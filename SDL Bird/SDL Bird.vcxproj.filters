@@ -23,5 +23,14 @@
     <Image Include="Images\mainico.png">
       <Filter>Файлы ресурсов</Filter>
     </Image>
+    <Image Include="Images\background.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="Images\ground.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="Images\message.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
   </ItemGroup>
 </Project>

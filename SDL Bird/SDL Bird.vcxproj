@@ -137,7 +137,10 @@
     <ClCompile Include="SDL Bird.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="Images\background.png" />
+    <Image Include="Images\ground.png" />
     <Image Include="Images\mainico.png" />
+    <Image Include="Images\message.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
