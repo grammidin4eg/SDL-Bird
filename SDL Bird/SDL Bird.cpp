@@ -8,10 +8,11 @@ int main()
     const int SCREEN_HEIGHT = 800;
     const int SCREEN_WIDTH = 600;
 
-    const float GROUND_SPEED = 0.01f;
-    const float GRAVITY = 0.05f;
+    const float GROUND_SPEED = 100;
+    const float GRAVITY = 100;
     const float JUMP_POWER = 10;
 
+    // Состояние игры (тип)
     enum class EGameState { Menu, Game, GameOver};
 
     // создаём окно
@@ -23,7 +24,7 @@ int main()
     // размер окна
     Vector2f windowSize(SCREEN_WIDTH, SCREEN_HEIGHT);
 
-    // загрузка текстур
+    // -------------------------------  загрузка текстур -----------------------------------------------------
 
     // фон
     Texture texBackground;
@@ -48,14 +49,9 @@ int main()
     Texture texMessage;
     texMessage.loadFromFile("Images/message.png");
 
-    Sprite sMessage;
-    sMessage.setTexture(texMessage);
-
-    sMessage.setScale(
-        windowSize.x / sMessage.getLocalBounds().width / 2,
-        windowSize.y / sMessage.getLocalBounds().height / 2);
-
-    sMessage.setPosition(sMessage.getGlobalBounds().width / 2, sMessage.getGlobalBounds().height / 2);
+    RectangleShape shapeMenuMessage(Vector2f(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2));
+    shapeMenuMessage.setPosition(SCREEN_WIDTH / 4, SCREEN_HEIGHT / 4);
+    shapeMenuMessage.setTexture(&texMessage);
 
     // Птица
     Texture texBirdMid;
@@ -72,10 +68,9 @@ int main()
 
     Sprite sGameOver;
     sGameOver.setTexture(texGameOver);
-    sGameOver.setPosition(0, SCREEN_HEIGHT / 3);
-    sGameOver.setScale(
-        windowSize.x / sGameOver.getLocalBounds().width / 2,
-        1);
+    sGameOver.setScale(windowSize.x / sGameOver.getLocalBounds().width / 2, 1);
+    sGameOver.setPosition(SCREEN_WIDTH / 2 - sGameOver.getGlobalBounds().width / 2, SCREEN_HEIGHT / 3);
+    
 
 
     EGameState curState = EGameState::Menu;
@@ -83,10 +78,18 @@ int main()
     // смещение скролла
     float scrollingOffset = 0;
 
-    // цикл игры
+    // Расчет времени
+    Clock clock;
+
+    // -------------------------------  цикл игры -----------------------------------------------------------
     while (window.isOpen())
     {
-        // обработка событий
+        // Перезапускаем таймер и записываем отмеренное время в dt
+        Time deltaTime = clock.restart();
+
+        float deltaTimeSec = deltaTime.asSeconds();
+        
+        // -------------------------------  обработка событий -----------------------------------------------
         Event event;
         while (window.pollEvent(event))
         {
@@ -110,10 +113,10 @@ int main()
             }
         }
 
-        // обновление объектов
+        // ------------------------------- обновление объектов ---------------------------------------------
         if (curState == EGameState::Game)
         {
-            scrollingOffset-=GROUND_SPEED;
+            scrollingOffset-=GROUND_SPEED * deltaTimeSec;
             if (scrollingOffset < -sGround1.getGlobalBounds().width)
             {
                 scrollingOffset = 0;
@@ -121,24 +124,22 @@ int main()
             sGround1.setPosition(scrollingOffset, SCREEN_HEIGHT - sGround1.getGlobalBounds().height);
             sGround2.setPosition(scrollingOffset + sGround2.getGlobalBounds().width, SCREEN_HEIGHT - sGround2.getGlobalBounds().height);
 
-
-            sBird.move(0, GRAVITY);
+            sBird.move(0, GRAVITY * deltaTimeSec);
 
             if (sBird.getPosition().y > (SCREEN_HEIGHT - sGround1.getGlobalBounds().height - sBird.getGlobalBounds().height))
             {
                 curState = EGameState::GameOver;
-                printf("Game Over");
             }
         }
 
-        // отрисовка
+        // -------------------------------  отрисовка ---------------------------------------------------------
         window.clear();
         // window.draw(sBackground);
         window.draw(shapeBackground);
         switch (curState)
         {
         case EGameState::Menu:
-            window.draw(sMessage);
+            window.draw(shapeMenuMessage);
             break;
         case EGameState::Game:
             window.draw(sBird);
