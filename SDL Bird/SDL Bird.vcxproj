@@ -138,9 +138,14 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="Images\background.png" />
+    <Image Include="Images\gameover.png" />
     <Image Include="Images\ground.png" />
     <Image Include="Images\mainico.png" />
     <Image Include="Images\message.png" />
+    <Image Include="Images\pipe-green.png" />
+    <Image Include="Images\yellowbird-downflap.png" />
+    <Image Include="Images\yellowbird-midflap.png" />
+    <Image Include="Images\yellowbird-upflap.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

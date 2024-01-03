@@ -32,5 +32,20 @@
     <Image Include="Images\message.png">
       <Filter>Файлы ресурсов</Filter>
     </Image>
+    <Image Include="Images\pipe-green.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="Images\yellowbird-downflap.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="Images\yellowbird-midflap.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="Images\yellowbird-upflap.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="Images\gameover.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
   </ItemGroup>
 </Project>
