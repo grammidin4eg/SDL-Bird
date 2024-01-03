@@ -10,7 +10,7 @@ int main()
 
     const float GROUND_SPEED = 100;
     const float GRAVITY = 100;
-    const float JUMP_POWER = 10;
+    const float JUMP_POWER = 10 * GRAVITY;
 
     // Состояние игры (тип)
     enum class EGameState { Menu, Game, GameOver};
@@ -59,7 +59,7 @@ int main()
 
     Sprite sBird;
     sBird.setTexture(texBirdMid);
-    sBird.setPosition(100, SCREEN_HEIGHT / 2);
+    sBird.setPosition(200, SCREEN_HEIGHT / 2);
 
 
     // сообщение Игра окончена
