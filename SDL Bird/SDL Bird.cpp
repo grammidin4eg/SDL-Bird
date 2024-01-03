@@ -13,19 +13,17 @@ int main()
     imgIcon.loadFromFile("Images/mainico.png");
     window.setIcon(32, 32, imgIcon.getPixelsPtr());
 
+    // размер окна
+    Vector2f windowSize(SCREEN_WIDTH, SCREEN_HEIGHT);
+
     // загрузка текстур
 
     // фон
     Texture texBackground;
     texBackground.loadFromFile("Images/background.png");
 
-    Sprite sBackground;
-    sBackground.setTexture(texBackground);
-    Vector2f windowSize(SCREEN_WIDTH, SCREEN_HEIGHT);
-
-    sBackground.setScale(
-        windowSize.x / sBackground.getLocalBounds().width,
-        windowSize.y / sBackground.getLocalBounds().height);
+    RectangleShape shapeBackground(windowSize);
+    shapeBackground.setTexture(&texBackground);
 
     // земля
     Texture texGround;
@@ -43,14 +41,9 @@ int main()
     Texture texMessage;
     texMessage.loadFromFile("Images/message.png");
 
-    Sprite sMessage;
-    sMessage.setTexture(texMessage);
-
-    sMessage.setScale(
-        windowSize.x / sMessage.getLocalBounds().width / 2,
-        windowSize.y / sMessage.getLocalBounds().height / 2);
-
-    sMessage.setPosition(sMessage.getGlobalBounds().width / 2, sMessage.getGlobalBounds().height / 2);
+    RectangleShape shapeMenuMessage(Vector2f(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2));
+    shapeMenuMessage.setPosition(SCREEN_WIDTH / 4, SCREEN_HEIGHT / 4);
+    shapeMenuMessage.setTexture(&texMessage);
 
 
     // цикл игры
@@ -68,8 +61,8 @@ int main()
 
         // отрисовка
         window.clear();
-        window.draw(sBackground);
-        window.draw(sMessage);
+        window.draw(shapeBackground);
+        window.draw(shapeMenuMessage);
         window.draw(sGround1);
         window.draw(sGround2);
         window.display();
